@@ -1,26 +1,11 @@
 import health from '../game'
-
-let testData = [
-  {name: 'мечник', health: 10},
-  {name: 'маг', health: 100},
-  {name: 'лучник', health: 80},
-]
-
-test('Sort at decrease', () => {
-  const decrease = [
-    {
-        "name": "маг",
-        "health": 100
-    },
-    {
-        "name": "лучник",
-        "health": 80
-    },
-    {
-        "name": "мечник",
-        "health": 10
-    }
-]
-  const result = health(testData);
-  expect(result).toEqual(decrease);
-});
+const dataList = [
+    ['critical', {name: 'Маг', health: 10}],
+    ['healthy', {name: 'Маг', health: 90}],
+    ['wounded', {name: 'Маг', health: 20}],
+  ];
+  
+test.each(dataList)('testing heal %s', (expected, params) => {
+  const result = health(params);
+  expect(result).toBe(expected);
+})
